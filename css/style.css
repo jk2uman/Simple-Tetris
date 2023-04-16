@@ -1,5 +1,5 @@
 .grid {
-    width: 300px;
+    width: 200px;
     height: 400px;
     background-color: yellowgreen;
     display: flex;
@@ -9,5 +9,7 @@
 .grid div {
     height: 20px;
     width: 20px;
+}
+.tetro {
     background-color: royalblue;
 }
