@@ -1,3 +1,6 @@
+.container {
+    display: flex;
+}
 .grid {
     width: 200px;
     height: 400px;
@@ -12,4 +15,16 @@
 }
 .tetro {
     background-color: royalblue;
+}
+.grid-grid {
+    margin: 50px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: yellowgreen;
+}
+.grid-grid div {
+    height: 20px;
+    width: 20px;
 }
