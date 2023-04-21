@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var timerId 
     var score = 0
     console.log(squares)
+    var colors = ['orange', 'red', 'green', 'yellow', 'blue',]
     
     const lTetro = [
         [1,width+1,width*2+1,2], 
@@ -50,12 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw () {
         present.forEach(index => {
             squares[presentPostiion + index].classList.add('tetro')
+            squares[presentPostiion + index].style.backgroundColor=  colors[random]
         })
     }
     draw()
     function undraw() {
         present.forEach(index => {
-            squares[presentPostiion +index].classList.remove('tetro')
+            squares[presentPostiion + index].classList.remove('tetro')
+            squares[presentPostiion + index].style.backgroundColor = ''
         })
     }
     undraw()
@@ -141,9 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function shapeDisplay() {
         squareDisplay.forEach(squares => {
             squares.classList.remove('tetro')
+            squares.style.backgroundColor = ''
         })
         nextTetro[nextRandom].forEach( index => {
             squareDisplay[indexDisplay + index].classList.add('tetro')
+            squareDisplay[indexDisplay + index].style.backgroundColor = colors[nextRandom]
         }) 
     }
     startButton.addEventListener('click', () => {
@@ -167,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.forEach(index => {
                     squares[index].classList.remove('taker')
                     squares[index].classList.remove('tetro')
+                    squares[index].style.backgroundColor = ''
                 })
                 const squaresRemoved = squares.splice(i, width)
                 squares = squaresRemoved.concat(squares)
