@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
-    var squares = document.querySelectorAll('.grid div')
+    let squares = Array.from(document.querySelectorAll('.grid div'))
     const scoreDisplay = document.querySelector('#score')
     const startButton = document.querySelector('#start-button')
     const width = 10
@@ -90,7 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             presentPostiion = 4
             draw()
             shapeDisplay()
-            scroreBoard()
+            scoreBoard()
+            gameOver()
         }
     }
     // How to move the Tetros left or right on the grid
@@ -157,22 +158,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 //Creating the scoreboard
-    function scroreBoard () {
+    function scoreBoard () {
         for (let i = 0; i < 199; i +=width) {
-            const rows = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
-
-            if(rows.every(index => squares[index].classList.contains('taker'))) {
-                score +=10
+            const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
+            if (row.every(index => squares[index].classList.contains('taker'))) { 
+                score+=10
                 scoreDisplay.innerHTML = score
-                rows.forEach(index => {
+                row.forEach(index => {
                     squares[index].classList.remove('taker')
+                    squares[index].classList.remove('tetro')
                 })
-                const removeSquares = squares.splice(i, width)
-                console.log(removeSquares)
+                const squaresRemoved = squares.splice(i, width)
+                squares = squaresRemoved.concat(squares)
+                squares.forEach(cell => grid.appendChild(cell))
+                console.log(squaresRemoved)
             }
-
         }
     }
-
+    function gameOver() {
+        if (present.some(index => squares[presentPostiion + index].classList.contains('taker'))) {
+            scoreDisplay.innerHTML = 'Game Over'
+            clearInterval(timerId)
+        }
+    }
 
 })
